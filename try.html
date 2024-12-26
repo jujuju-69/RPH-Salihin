@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Background Sound</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      min-height: 200vh; /* Untuk menguji scrolling */
+      margin: 0;
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+      color: white;
+    }
+    h1, p {
+      text-align: center;
+    }
+
+    /* Styling untuk ikon PDF dan butang download */
+    .download-container {
+      position: fixed;
+      right: 20px; /* Posisi di sebelah kanan */
+      bottom: 100px; /* Posisi di atas sedikit daripada bawah */
+      z-index: 1000;
+      display: none; /* Secara lalai sembunyikan */
+      opacity: 0; /* Untuk animasi keluar */
+      transform: translateX(100%); /* Mulakan dari luar sebelah kanan */
+      transition: transform 0.5s ease, opacity 0.5s ease; /* Animasi */
+    }
+
+    /* Styling untuk butang download */
+    .download-btn {
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      color: white;
+      background-color: #17a2b8;
+      border: 2px solid #17a2b8;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .download-btn:hover {
+      background-color: #138496;
+      color: white;
+    }
+
+    /* Styling untuk ikon PDF */
+    .pdf-logo {
+      position: fixed;
+      right: 20px; /* Posisi di sebelah kanan */
+      bottom: 20px; /* Posisi di bawah */
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    /* Styling untuk ikon muzik */
+    .music-container {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 50px;
+    }
+
+    .music-logo {
+      width: 100px;
+      height: 100px;
+      cursor: pointer;
+    }
+
+    /* Styling untuk background audio */
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Background Sound Website</h1>
+  <p>Muzik akan dimainkan secara automatik apabila anda membuka laman web. Letakkan tetikus pada ikon PDF untuk memuat turun manual pengguna.</p>
+
+  <div class="music-container">
+    <div class="music-logo">
+      <img src="music-icon.png" alt="Music Icon">
+    </div>
+  </div>
+
+  <!-- Ikon PDF untuk menunjukkan butang download apabila tetikus berada dekat -->
+  <div class="pdf-logo" onmouseover="showDownloadButton()" onmouseout="hideDownloadButton()">
+    <img src="pdf-icon.png" alt="PDF Icon" width="50" height="50">
+  </div>
+
+  <!-- Butang Download Manual -->
+  <div class="download-container" id="downloadButtonContainer">
+    <a href="manual.pdf" download>
+      <button class="download-btn">Download Manual Pengguna</button>
+    </a>
+  </div>
+
+  <!-- Audio background yang akan dimainkan secara automatik -->
+  <audio id="backgroundAudio" autoplay loop>
+    <source src="bgsound.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    const downloadButtonContainer = document.getElementById('downloadButtonContainer');
+
+    // Fungsi untuk menunjukkan butang download apabila tetikus berada di atas ikon PDF
+    function showDownloadButton() {
+      downloadButtonContainer.style.display = 'block';
+      downloadButtonContainer.style.transform = 'translateX(0)'; /* Tunjukkan butang dengan animasi */
+      downloadButtonContainer.style.opacity = '1'; /* Butang muncul dengan fade-in */
+    }
+
+    // Fungsi untuk menyembunyikan butang download apabila tetikus keluar
+    function hideDownloadButton() {
+      downloadButtonContainer.style.transform = 'translateX(100%)'; /* Gerakkan butang keluar ke kanan */
+      downloadButtonContainer.style.opacity = '0'; /* Butang hilang dengan fade-out */
+      setTimeout(function() {
+        downloadButtonContainer.style.display = 'none';
+      }, 500); /* Sembunyikan butang selepas animasi selesai */
+    }
+  </script>
+</body>
+</html>

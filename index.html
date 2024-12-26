@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <title>Laman Pembelajaran Algoritma</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(180deg, #f5f7fa, #c3cfe2);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: linear-gradient(90deg, #007991, #78ffd6);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            font-size: 2.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: fadeInDown 1s ease-in-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        header img {
+            height: 60px;
+            width: auto;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        nav a {
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            font-size: 1.2rem;
+            border-radius: 30px;
+            margin: 0 0.5rem;
+            transition: all 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #78ffd6;
+            color: #333;
+        }
+
+        nav a.active {
+            background-color: #007991;
+            color: white;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .container {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            animation: slideIn 1s ease-in-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section h2 {
+            color: #007991;
+            font-size: 2.2rem;
+            border-bottom: 4px solid #78ffd6;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(90deg, #007991, #78ffd6);
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: linear-gradient(90deg, #78ffd6, #007991);
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            font-size: 1rem;
+            margin-top: 3rem;
+        }
+
+        iframe {
+            width: 100%;
+            height: 400px;
+            border-radius: 20px;
+            border: none;
+            margin-top: 2rem;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .card {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .card-item {
+            flex: 1 1 calc(30% - 1rem);
+            background-color: #f5f7fa;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+
+        .card-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-item h3 {
+            color: #007991;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-item img {
+            width: 100px;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Swiper Styling */
+        .swiper-container {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .swiper-slide {
+            display: flex;
+            justify-content: center;
+        }
+
+        .stats {
+            margin-top: 1.5rem;
+            background: #f9fafb;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .stats p {
+            font-size: 1.1rem;
+            margin: 0.5rem 0;
+        }
+		.feedback {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #d9534f; /* Merah untuk jawapan salah */
+}
+
+.feedback.correct {
+    color: #5bc0de; /* Biru untuk jawapan betul */
+}
+
+.question-box {
+    background-color: #f7f7f7;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.options-container {
+    margin-top: 1rem;
+}
+
+.option {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+button {
+    background-color: #4e4376;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #2b5876;
+}
+
+#result-container {
+    text-align: center;
+    margin-top: 2rem;
+}
+.video-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; 
+            object-fit: cover; 
+        }
+		 .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(18, 225, 217, 0.5); 
+            z-index: -1; 
+        }
+		.music-container {
+      position: fixed;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+    }
+    .music-logo {
+      width: 50px;
+      height: 50px;
+      background: #4facfe;
+      border: 2px solid white;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .music-logo:hover {
+      background: #00f2fe;
+    }
+    .music-logo img {
+      width: 30px;
+      height: 30px;
+    }
+    .btn-container {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-right: 20px;
+      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+      transform: translateX(100%); /* Tersembunyi secara lalai */
+      opacity: 0;
+    }
+    .music-container:hover .btn-container {
+      transform: translateX(0); /* Slide keluar */
+      opacity: 1;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: 2px solid white;
+      border-radius: 5px;
+      cursor: pointer;
+      color: white;
+      transition: background 0.3s, color 0.3s;
+    }
+    button:hover {
+      background: white;
+      color: #00f2fe;
+    }
+    .play-btn {
+      border-color: #28a745;
+    }
+    .mute-btn {
+      border-color: #dc3545;
+    }
+    .replay-btn {
+      border-color: #ffc107;
+    }
+	/* Styling untuk container download button */
+    .download-container {
+      position: fixed;
+      right: 20px; /* Posisi di sebelah kanan */
+      bottom: 20px; /* Posisi di bawah */
+      z-index: 1000;
+    }
+    .download-btn {
+      padding: 5px 10px;
+      font-size: 13px;
+      border-radius: 5px;
+      cursor: pointer;
+      color: white;
+      background-color: #17a2b8;
+      border: 2px solid #17a2b8;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .download-btn:hover {
+      background-color: #138496;
+      color: white;
+    }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="algorithm.jpg" alt="Logo Laman Pembelajaran">
+        JOM BELAJAR ALGORITMA
+    </header>
+
+    <nav>
+	    <a href="#pengenalan">Pengenalan</a>
+        <a href="#nota">Nota</a>
+        <a href="#video">Video</a>
+		<a href="#aktiviti">Aktiviti</a>
+        <a href="#kuiz">Kuiz</a>
+		<a href="#refleksi">Refleksi</a>
+		<a href="#homework">Kerja Rumah</a>
+		
+
+    </nav>
+	<div class="music-container">
+    <div class="btn-container">
+      <button class="play-btn" onclick="playSound()">Mulakan Lagu</button>
+      <button class="mute-btn" onclick="muteSound()">Matikan Lagu</button>
+      <button class="replay-btn" onclick="replaySound()">Ulang Lagu</button>
+    </div>
+    <div class="music-logo">
+      <img src="music.jpg" alt="Music Icon">
+    </div>
+  </div>
+
+  <audio id="backgroundAudio" loop>
+    <source src="bgsound.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+<!-- Butang Download Manual -->
+  <div class="download-container">
+    <a href="Manual Pengguna Kit Media.pdf" download>
+      <button class="download-btn">Download  Manual Pengguna</button>
+    </a>
+  </div>
+  
+	<video class="video-bg" autoplay loop muted>
+        <source src="bgvideo.mp4" type="video/mp4">
+    </video>
+	<div class="overlay"></div>
+	<!-- Laman Utama -->
+    <br><section id="pengenalan" class="section">
+       <h2>Pengenalan</h2>
+       <p>Selamat datang ke laman pembelajaran Algoritma! Di sini, anda akan belajar tentang konsep-konsep asas dalam algoritma, seperti pseudokod, carta alir, dan banyak lagi.</p>
+    </section>
+
+		 <!-- Countdown Peperiksaan -->
+    <section id="countdown" class="section" style="margin-top: 2rem; text-align: center; background-color: #f9fafb; padding: 1.5rem; border-radius: 20px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+        <h3 style="color: #007991;">Countdown Peperiksaan</h3>
+        <p>Peperiksaan akhir tahun tingkatan 1 pada 2 Disember 2025 :</p>
+        <div id="timer" style="font-size: 1.5rem; font-weight: bold; color: #d9534f;">Loading...</div>
+    </section>
+	
+    <div class="container">
+        <!-- Nota Pembelajaran -->
+        <section id="nota" class="section">
+            <h2>Nota Pembelajaran</h2>
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <iframe src="https://heyzine.com/flip-book/97ba939aeb.html" frameborder="0"></iframe>
+                    </div>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </section>
+
+        <!-- Video Pengajaran -->
+        <section id="video" class="section">
+            <h2>Video Pengajaran</h2>
+            <p>Tonton video berikut untuk pemahaman mendalam:</p>
+            <iframe src="https://www.youtube.com/embed/6O0urLpteLk" allowfullscreen></iframe>
+            <p>Tonton video berikut untuk tutorial penggunaan Draw.io:</p>
+            <iframe src="https://www.youtube.com/embed/_zZczZxyXKM" allowfullscreen></iframe>
+        </section>
+
+<!-- Aktiviti Gallery Walk -->
+        <section id="aktiviti" class="section">
+            <h2>Aktiviti</h2>
+			<p>1) Murid perlulah membentuk 6 kumpulan terdiri daripada 4 orang murid<p>
+            <p>2) Guru memberikan satu kad situasi masalah untuk meminta murid-murid berbincang dalam kumpulan supaya mereka dapat menyediakan carta alir dan pseudokod menggunakan Draw.io</p>
+			<p>3) Guru meminta murid-murid untuk menghantar hasil kerja di dalam padlet.</p>
+            <p>3) Guru meminta murid-murid melihat hasil kerja group lain di dalam padlet dan memberikan komen atau cadangan penambahbaikan.</p>
+            <div class="card">
+                <div class="card-item">
+                    <img src="drawio.jpg" alt="Diagram Icon">
+                    <h3>Guna Draw.io</h3>
+                    <a href="https://app.diagrams.net/" target="_blank" class="btn">Mula Aktiviti</a>
+                </div>
+                <div class="card-item">
+                    <img src="padlet.jpg" alt="Padlet Icon">
+                    <h3>Penghantaran Aktiviti</h3>
+                    <a href="https://padlet.com/d20221102586/activity-gallery-board-mmm4igkvbs7a6ma1" target="_blank" class="btn">Hantar Kerja</a>
+                </div>
+            </div>
+        </section>
+		
+        <!-- Kuiz Interaktif -->
+		<section id="kuiz" class="section">
+    <h2>Kuiz Interaktif - Menghasilkan Pseudokod dan Carta Alir</h2>
+    <p>Pilih jawapan yang betul untuk setiap soalan:</p>
+
+    <div id="question-container">
+        <!-- Soalan 1 -->
+        <div class="question-box">
+            <p><strong>Soalan 1:</strong> Pilih arahan yang sesuai untuk pseudokod bagi pengulangan "For" dalam carta alir.</p>
+            <div class="options-container">
+                <label class="option"><input type="radio" name="question1" value="START"> START</label>
+                <label class="option"><input type="radio" name="question1" value="FOR i = 1 TO 10"> FOR i = 1 TO 10</label>
+                <label class="option"><input type="radio" name="question1" value="END"> END</label>
+                <label class="option"><input type="radio" name="question1" value="OUTPUT i"> OUTPUT i</label>
+            </div>
+            <div class="feedback" id="feedback1"></div>
+        </div>
+
+        <!-- Soalan 2 -->
+        <div class="question-box">
+            <p><strong>Soalan 2:</strong> Pilih arahan untuk membuat keputusan dalam pseudokod menggunakan "IF".</p>
+            <div class="options-container">
+                <label class="option"><input type="radio" name="question2" value="IF condition"> IF condition</label>
+                <label class="option"><input type="radio" name="question2" value="FOR i = 1 TO 5"> FOR i = 1 TO 5</label>
+                <label class="option"><input type="radio" name="question2" value="THEN"> THEN</label>
+                <label class="option"><input type="radio" name="question2" value="END IF"> END IF</label>
+            </div>
+            <div class="feedback" id="feedback2"></div>
+        </div>
+
+        <!-- Soalan 3 -->
+        <div class="question-box">
+            <p><strong>Soalan 3:</strong> Pilih arahan untuk melaksanakan pengulangan "WHILE" dalam pseudokod.</p>
+            <div class="options-container">
+                <label class="option"><input type="radio" name="question3" value="WHILE condition"> WHILE condition</label>
+                <label class="option"><input type="radio" name="question3" value="DO"> DO</label>
+                <label class="option"><input type="radio" name="question3" value="END WHILE"> END WHILE</label>
+                <label class="option"><input type="radio" name="question3" value="OUTPUT result"> OUTPUT result</label>
+            </div>
+            <div class="feedback" id="feedback3"></div>
+        </div>
+
+        <!-- Soalan 4 -->
+        <div class="question-box">
+            <p><strong>Soalan 4:</strong> Pilih langkah-langkah yang betul untuk menggambarkan carta alir untuk pengulangan "FOR".</p>
+            <div class="options-container">
+                <label class="option"><input type="radio" name="question4" value="Start"> Start</label>
+                <label class="option"><input type="radio" name="question4" value="Loop"> Loop</label>
+                <label class="option"><input type="radio" name="question4" value="Stop"> Stop</label>
+                <label class="option"><input type="radio" name="question4" value="End of loop"> End of loop</label>
+            </div>
+            <div class="feedback" id="feedback4"></div>
+        </div>
+
+        <!-- Soalan 5 -->
+        <div class="question-box">
+            <p><strong>Soalan 5:</strong> Pilih komponen carta alir yang menggambarkan keputusan dalam pseudokod.</p>
+            <div class="options-container">
+                <label class="option"><input type="radio" name="question5" value="Decision (Diamond)"> Decision (Diamond)</label>
+                <label class="option"><input type="radio" name="question5" value="Process (Rectangle)"> Process (Rectangle)</label>
+                <label class="option"><input type="radio" name="question5" value="Input/Output (Parallelogram)"> Input/Output (Parallelogram)</label>
+                <label class="option"><input type="radio" name="question5" value="Connector (Circle)"> Connector (Circle)</label>
+            </div>
+            <div class="feedback" id="feedback5"></div>
+        </div>
+    </div>
+
+    <div id="result-container" style="display: none;">
+        <h3>Skor: <span id="score">0</span></h3>
+        <button id="restart-btn">Mulakan Semula</button>
+    </div>
+
+    <button id="submit-btn">Semak Jawapan</button>
+	
+	 <h2>Kuiz Tambahan</h2>
+            <p>Cabarkan pengetahuan anda dengan kuiz ini:</p>
+            
+            <a href="https://quizizz.com/join/quiz/63bbd49f8f881e001d8812fd/start" target="_blank" class="btn">Mulakan Kuiz</a>
+</section>
+
+         <!-- Refleksi -->
+         <section id="refleksi" class="section">
+            <h2>Refleksi Anda</h2>
+			<p>Berikan refleksi anda menggunakan Mentimeter<p>
+            <div class="card">
+                <div class="card-item">
+                    <img src="menti.jpg" alt="Diagram Icon">
+                    <h3>Guna Mentimeter</h3>
+                    <a href="https://www.menti.com/al4b2o824ca3" target="_blank" class="btn">Mula Aktiviti</a>
+                </div>
+            </div>
+        </section>
+		
+		<!-- Homework -->
+		<section id="homework" class="section">
+            <h2>Kerja Rumah</h2>
+			<p>Murid perlu membuat soalan ini dan dihantar ke dalam padlet<p>
+                <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid #ddd; border-radius: 20px; padding: 2rem; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); background-color: #f9fafb; max-width: 600px; margin: auto;">
+                <img src="soalan.jpg" alt="Soalan" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+                </div>
+                <div class="card-item">
+                    <img src="padlet.jpg" alt="Padlet Icon">
+                    <h3>Penghantaran Kerja Rumah</h3>
+                    <a href="https://padlet.com/d20221102586/penghantaran-kerja-rumah-7vpwxc8vvby92a1f" target="_blank" class="btn">Hantar Kerja</a>
+                </div>       
+        </section>
+		
+</section>
+
+    </div>
+
+    </div>
+
+    <footer>
+        &copy; 2024 Laman Pembelajaran Algoritma Interaktif. Semua Hak Cipta Terpelihara.
+    </footer>
+
+    <script>
+	 const audio = document.getElementById('backgroundAudio');
+
+    function playSound() {
+      audio.play();
+    }
+
+    function muteSound() {
+      audio.pause();
+    }
+
+    function replaySound() {
+      audio.currentTime = 0; // Reset audio to start
+      audio.play(); // Play audio from the beginning
+    }
+		
+		let correctAnswers = {
+    question1: "FOR i = 1 TO 10",
+    question2: "IF condition",
+    question3: "WHILE condition",
+    question4: "Loop",
+    question5: "Decision (Diamond)"
+};
+
+let score = 0;
+const scoreElement = document.getElementById("score");
+const resultContainer = document.getElementById("result-container");
+const submitBtn = document.getElementById("submit-btn");
+const restartBtn = document.getElementById("restart-btn");
+
+submitBtn.addEventListener("click", () => {
+    score = 0;
+
+    Object.keys(correctAnswers).forEach((question, index) => {
+        const selectedOption = document.querySelector(`input[name="${question}"]:checked`);
+        const feedback = document.getElementById(`feedback${index + 1}`);
+
+        if (selectedOption) {
+            if (selectedOption.value === correctAnswers[question]) {
+                score++;
+                feedback.textContent = "Betul!";
+                feedback.classList.add("correct");
+            } else {
+                feedback.textContent = "Salah!";
+                feedback.classList.remove("correct");
+            }
+        } else {
+            feedback.textContent = "Sila pilih jawapan.";
+            feedback.classList.remove("correct");
+        }
+    });
+
+    scoreElement.textContent = score;
+    resultContainer.style.display = "block";
+});
+
+restartBtn.addEventListener("click", () => {
+    score = 0;
+    scoreElement.textContent = score;
+    resultContainer.style.display = "none";
+
+    document.querySelectorAll("input[type='radio']").forEach(input => {
+        input.checked = false;
+    });
+
+    document.querySelectorAll(".feedback").forEach(feedback => {
+        feedback.textContent = "";
+    });
+});
+
+// Tetapkan tarikh peperiksaan
+    const examDate = new Date("2025-02-02T08:00:00").getTime();
+
+    // Fungsi Countdown
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const timeRemaining = examDate - now;
+
+        if (timeRemaining > 0) {
+            const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+            document.getElementById("timer").innerHTML = `
+                ${days} hari ${hours} jam ${minutes} minit ${seconds} saat
+            `;
+        } else {
+            document.getElementById("timer").innerHTML = "Peperiksaan sedang berlangsung atau telah tamat!";
+            clearInterval(interval);
+        }
+    }
+
+    // Kemas kini countdown setiap saat
+    const interval = setInterval(updateCountdown, 1000);
+    </script>
+
+</body>
+</html>
